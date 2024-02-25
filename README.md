@@ -1,7 +1,3 @@
-# Finance Dashboard App
-
-Build A MERN Finance Dashboard App
-
-Video: https://www.youtube.com/watch?v=uoJ0Tv-BFcQ
-
-For all related questions and discussions about this project, check out the discord: https://discord.gg/2FfPeEk2mX
+a MERN Finance Dashboard App that has Machine Learning Predictions. 
+The frontend consist of Vite for our starter application, Redux Toolkit for state management, Material UI for our component library, and Recharts for our Charts. 
+For the backend Node Js as our runtime, Express Js as our backend framework, and MongoDB for our database.
