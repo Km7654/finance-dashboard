@@ -30,14 +30,20 @@ const Predictions = () => {
         return [i, revenue];
       }
     );
-    const regressionLine = regression.linear(formatted);
+    const Linear = regression.linear(formatted);
+    const Exponential = regression.exponential(formatted);
+    const Polynomial = regression.polynomial(formatted);
 
     return monthData.map(({ month, revenue }, i: number) => {
       return {
         name: month,
         "Actual Revenue": revenue,
-        "Regression Line": regressionLine.points[i][1],
-        "Predicted Revenue": regressionLine.predict(i + 12)[1],
+        "Linear": Linear.points[i][1],
+        "Exponential": Exponential.points[i][1],
+        "Polynomial": Polynomial.points[i][1],
+        "Predicted Revenue": Linear.predict(i + 12)[1],
+        "Predicted Revenue2": Exponential.predict(i + 12)[1],
+        "Predicted Revenue3": Polynomial.predict(i + 12)[1],
       };
     });
   }, [kpiData]);
@@ -101,15 +107,41 @@ const Predictions = () => {
           />
           <Line
             type="monotone"
-            dataKey="Regression Line"
+            dataKey="Linear"
             stroke="#8884d8"
+            dot={false}
+          />
+          <Line
+            type="monotone"
+            dataKey="Exponential"
+            stroke={palette.secondary[500]}
+            dot={false}
+          />
+          <Line
+            type="monotone"
+            dataKey="Polynomial"
+            stroke="#66cc72"
             dot={false}
           />
           {isPredictions && (
             <Line
               strokeDasharray="5 5"
               dataKey="Predicted Revenue"
+              stroke="#8884d8"
+            />
+          )}
+          {isPredictions && (
+            <Line
+              strokeDasharray="5 5"
+              dataKey="Predicted Revenue2"
               stroke={palette.secondary[500]}
+            />
+          )}
+           {isPredictions && (
+            <Line
+              strokeDasharray="5 5"
+              dataKey="Predicted Revenue3"
+              stroke="#66cc72"
             />
           )}
         </LineChart>
@@ -117,5 +149,6 @@ const Predictions = () => {
     </DashboardBox>
   );
 };
+
 
 export default Predictions;
